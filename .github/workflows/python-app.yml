@@ -30,4 +30,21 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
+        def test_valid_username():
+          assert is_valid_username("john_doe")
+          assert not is_valid_username("john doe")
+          assert not is_valid_username("")
+        def test_valid_password():
+          assert is_valid_password("P@ssw0rd")
+          assert not is_valid_password("password")
+          assert not is_valid_password("12345678")
+          assert not is_valid_password("P@ssw0r")
+          assert is_valid_password("P@ssword123")
+          
+        def test_valid_email():
+          assert is_valid_email("john@example.com")
+          assert not is_valid_email("john@com")
+          assert not is_valid_email("john@example")
+          assert not is_valid_email("john@examplecom")
+        
         pytest
